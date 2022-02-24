@@ -1,17 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './index.css'
+import Routers from 'routers'
+import { StrictMode } from 'react'
+import { render } from 'react-dom'
+import reportWebVitals from './reportWebVitals'
+import { BrowserRouter } from 'react-router-dom'
+import CssBaseline from '@mui/material/CssBaseline'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const queryClient = new QueryClient()
+const theme = createTheme({ typography: { button: { textTransform: 'none' } } })
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+render(
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Routers />
+        </BrowserRouter>
+        <CssBaseline />
+      </ThemeProvider>
+    </QueryClientProvider>
+  </StrictMode>,
+  document.getElementById('root'),
+)
+
+reportWebVitals()
